@@ -6,6 +6,7 @@ echo.
 for %THEME_VERSION in (9 11) do (
     set THEME_FILENAME=TWRP_Multi-Color_Theme_Pack_v%TWRP_VERSION%_%THEME_VERSION%.zip
     set PACKAGE_DIR=package_v%THEME_VERSION%
+    md ".\%PACKAGE_DIR%\theme" >& NUL
     iff "%@lower[%1]"=="all" then
         del %PACKAGE_DIR%\theme\ui.zip /eq >& NUL
         echo Creating clean build of %THEME_FILENAME%...
