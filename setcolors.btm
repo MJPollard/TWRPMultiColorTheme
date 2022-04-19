@@ -1,0 +1,13 @@
+@echo off
+pushd
+on break goto end
+for %1 in (cyan green orange purple yellow) do (
+    copy .\ui\themes\red\images\*.* .\ui\themes\%1\images /w
+)
+cd .\ui\themes\cyan\images ^ adjustpng *.png /hsl:180
+cd ...\green\images ^ adjustpng *.png /hsl:128
+cd ...\orange\images ^ adjustpng *.png /hsl:32
+cd ...\purple\images ^ adjustpng *.png /hsl:-64
+cd ...\yellow\images ^ adjustpng *.png /hsl:64
+:end
+popd

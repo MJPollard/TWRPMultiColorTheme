@@ -1,0 +1,31 @@
+@echo off
+set TWRP_VERSION=3.6.1
+pushd
+on break goto end
+echo.
+for %THEME_VERSION in (9 11) do (
+    set THEME_FILENAME=TWRP_Multi-Color_Theme_Pack_v%TWRP_VERSION%_%THEME_VERSION%.zip
+    set PACKAGE_DIR=package_v%THEME_VERSION%
+    iff "%@lower[%1]"=="all" then
+        del %PACKAGE_DIR%\theme\ui.zip /eq >& NUL
+        echo Creating clean build of %THEME_FILENAME%...
+    else
+        echo Creating %THEME_FILENAME%...
+    endiff
+    copy %THEME_VERSION%.xml .\ui_v%THEME_VERSION%\portrait.xml >& NUL
+    cd common
+    zip -uroXD "..\%PACKAGE_DIR%\theme\ui.zip" *.* >& NUL
+    cd ..\ui_v%THEME_VERSION%
+    zip -uroXD "..\%PACKAGE_DIR%\theme\ui.zip" *.* >& NUL
+    cd "..\%PACKAGE_DIR%"
+    zip -uroXD "..\zip\%THEME_FILENAME%" *.* >& NUL
+    cd ..\zip
+    md5sum "%THEME_FILENAME%" > "%THEME_FILENAME%.md5sum"
+    touch /q /r "%THEME_FILENAME%" "%THEME_FILENAME%.md5sum"
+    cd ..
+)
+:end
+popd
+set THEME_VERSION=
+set THEME_FILENAME=
+set PACKAGE_DIR=

@@ -1,0 +1,23 @@
+ui_print(" ");
+ui_print(" ");
+ui_print("----------------------------------------");
+ui_print("|     TWRP Multi-Color Theme Pack      |");
+ui_print("|          By Martin Pollard           |");
+ui_print("| Designed for TRWP v3.5+ (Android 11) |");
+ui_print("----------------------------------------");
+ui_print(" ");
+show_progress(0.10, 0); 
+ui_print("- Backing up old theme");
+ifelse(run_program("/sbin/sh", "-c", "test -f /data/media/0/TWRP/theme/ui.zip") == 0, (
+  run_program("/sbin/mv", "/data/media/0/TWRP/theme/ui.zip", "/data/media/0/TWRP/theme/ui_old.zip");
+  run_program("/sbin/busybox", "sync");
+  show_progress(0.33, 0);
+),(ui_print("- No previous theme to back up");));
+ui_print("- Installing theme");
+package_extract_dir("theme", "/data/media/0/TWRP/theme");
+show_progress(0.90, 0);
+run_program("/sbin/busybox", "sync");
+ui_print(" ");
+ui_print("Installation complete!");
+ui_print(" ");
+show_progress(0.100, 0);    

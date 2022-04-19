@@ -1,0 +1,16 @@
+@echo off
+on break goto end
+set THEME_FILENAME=
+    set THEME_VERSION=9
+    set THEME_FILENAME=TWRP_Multi-Color_Theme_Pack_v%THEME_VERSION%.zip
+    set DEVICE_DESTINATION=/sdcard/Customize/recovery
+    set TWRP_THEME_DIRECTORY=/sdcard/TWRP/theme
+    set TWRP_UI_FILENAME=.\package_v%THEME_VERSION%\theme\ui.zip
+    echo.
+    echo Pushing "%THEME_FILENAME%" to %DEVICE_DESTINATION%
+    adb push "%THEME_FILENAME%" %DEVICE_DESTINATION%
+    adb push "%THEME_FILENAME%.md5sum" %DEVICE_DESTINATION%
+    adb push "%TWRP_UI_FILENAME%" %TWRP_THEME_DIRECTORY%
+:end
+set THEME_VERSION=
+set THEME_FILENAME=
